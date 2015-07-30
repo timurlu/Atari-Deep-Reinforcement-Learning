@@ -11,7 +11,7 @@ require 'nngraph'
 require 'nnutils'
 require 'image'
 require 'Scale'
-require 'NeuralQLearner'
+
 require 'TransitionTable'
 require 'Rectifier'
 
@@ -129,6 +129,9 @@ function setup(_opt)
     if not _opt.agent_params.state_dim then
         _opt.agent_params.state_dim = gameEnv:nObsFeature()
     end
+
+    -- include agent code
+    pcall(require, _opt.agent)
 
     local agent = dqn[_opt.agent](_opt.agent_params)
 

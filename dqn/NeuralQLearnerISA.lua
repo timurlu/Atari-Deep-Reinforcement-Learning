@@ -387,13 +387,13 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
     -- ISA preprocessing
     if self.is_preprocessed == false then
         if self.numSteps == 50000 then
-            print('Samples '..self.counter)
+            --print('Samples '..self.counter)
             if self.counter > 500 then
                 local X = self.X - torch.mean(self.X, 2) * torch.ones(1, self.X:size(2))
                 X = X[{{1,self.counter},{}}]:t()
-                print('Patches '..X:size(1)..'x'..X:size(2))
+                --print('Patches '..X:size(1)..'x'..X:size(2))
                 local V = pcaeig(X, 32)
-                print('Components '..V:size(1)..'x'..V:size(2))
+                --print('Components '..V:size(1)..'x'..V:size(2))
 
                 local isastate = {
                    learningRate = 0.5,
@@ -420,7 +420,7 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
                 for i = 1,1000 do
                     W,j = optim.sgd(ISA, W, isastate)
                     W = sqrtmi(W*W:t())*W
-                    print(j[1])
+
                     if i % 2 == 0 then
                         collectgarbage()
                     end
@@ -433,16 +433,15 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
                 W = W:cuda()
 
                 W = W:reshape(32,4,8,8)
-                print('Preinitialized weights:')
-                print('Min value '..W:min())
-                print('Max value '..W:max())
-                print('Mean value '..W:mean())
+                --print('Min value '..W:min())
+                --print('Max value '..W:max())
+                --print('Mean value '..W:mean())
 
-                print('Network weights:')
+                --print('Network weights:')
                 local weights_network = self.network:get(2).weight
-                print('Min value '..weights_network:min())
-                print('Max value '..weights_network:max())
-                print('Mean value '..weights_network:mean())
+               -- print('Min value '..weights_network:min())
+                --print('Max value '..weights_network:max())
+                --print('Mean value '..weights_network:mean())
 
                 self.network:get(2).weight = W
 
@@ -468,7 +467,7 @@ function nql:perceive(reward, rawstate, terminal, testing, testing_ep)
                         end
                     end
                 end
-                print('Frames '..self.num_frames..', patches '..num_patches)
+                --print('Frames '..self.num_frames..', patches '..num_patches)
                 collectgarbage()
                 self.num_frames = 0
             end
