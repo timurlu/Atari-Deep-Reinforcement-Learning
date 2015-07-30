@@ -1,12 +1,12 @@
 ##Deep Reinforcement learning to play Atari games
 
 This project contains the source code of DeepMind's deep reinforcement
-learning architecture described in the paper "Human-level control through deep reinforcement
-learning", Nature 518, 529–533 (26 February 2015) doi:10.1038/nature14236.
+learning architecture described in the paper ["Human-level control through deep reinforcement
+learning", Nature 518, 529â€“533 (26 February 2015)](http://doi.org/10.1038/nature14236).
 
 The following changes to DeepMind code were made:
 
-* [ñuDNN support] (https://developer.nvidia.com/cudnn)
+* [cuDNN support] (https://developer.nvidia.com/cudnn)
 
 * Different weight initialization methods:
   * Xavier Glorot, Yoshua Bengio ["Understanding the difficulty of training deep feedforward neural networks"](http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf), 2010.
