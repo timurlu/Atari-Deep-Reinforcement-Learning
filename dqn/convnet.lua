@@ -56,12 +56,16 @@ function create_network(args)
     -- add the last fully connected layer (to actions)
     net:add(nn.Linear(last_layer_size, args.n_actions))
 
+    -- add weight initialization
+    local method = 'kaiming'
+    local net_w = require('winit')(net,method)
+
     if args.gpu >=0 then
-        net:cuda()
+        net_w:cuda()
     end
     if args.verbose >= 2 then
-        print(net)
+        print(net_w)
         print('Convolutional layers flattened output size:', nel)
     end
-    return net
+    return net_w
 end
